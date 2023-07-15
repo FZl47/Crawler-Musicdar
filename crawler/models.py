@@ -38,7 +38,7 @@ class MusicModel(models.Model):
     get_128_by = models.TextField(help_text='گرفتن موزیک با کیفیت 128 بر اساس', null=True)
     get_320_by = models.TextField(help_text='گرفتن موزیک با کیفیت 320 بر اساس', null=True)
     get_singer_by = models.TextField(help_text='گرفتن خواننده بر اساس', null=True)
-    get_category_by = models.TextField(help_text='گرفتن خواننده بر اساس', null=True)
+    get_category_by = models.TextField(help_text='گرفتن دسته بندی بر اساس', null=True)
 
     def __str__(self):
         return f'Music - {self.site}'
