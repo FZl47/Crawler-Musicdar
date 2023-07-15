@@ -36,7 +36,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # apps
-    'public'
+    'crawler',
+    'public',
+    'music',
 ]
 
 MIDDLEWARE = [
@@ -128,3 +130,8 @@ CELERY_TIMEZONE = TIME_ZONE
 # CELERY_IMPORTS = [
 #     'public.tasks',
 # ]
+
+# MUSIC SITE CONFIG
+#   Musicdar.ir
+MUSIC_SITE_DOMAIN = 'musicdar.ir'
+MUSIC_SITE_TITLE = 'موزیکدار'
