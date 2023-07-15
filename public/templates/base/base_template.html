@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block Title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vazir-font/30.0.0/font-face.css"
+          integrity="sha512-ZHFuHiK3EA1uh2tx7nB0j9HyXR/IAFW24KVNFGjY8QIjtDKHmcowjUyObXF40wYrG25+kECHEbH8rL+HbvRwYA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+    {% block Link %}
+    {% endblock %}
+    {% block Style %}
+    {% endblock %}
+</head>
+<body>
+{% block Content %}
+
+{% endblock %}
+{% block Script %}
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,90 @@
+{% extends 'base/base_template.html' %}
+{% load static %}
+
+{% block Title %}
+    Home | Musicdar
+{% endblock %}
+
+{% block Link %}
+
+{% endblock %}
+
+{% block Style %}
+    <style>
+
+        * {
+            transition: all .25s;
+        }
+
+        #header {
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px #ddd;
+        }
+
+        .header-content-right a {
+            margin: 5px 10px;
+            padding: 7px 10px;
+            color: #555;
+            text-decoration: none;
+            border-radius: 10px;
+        }
+
+        .header-content-right a:hover {
+            color: #242483;
+            background: rgba(215, 215, 215, 0.6);
+            border-radius: 25px;
+        }
+
+        .header-content-right a i {
+            margin: 0 2px;
+        }
+
+        .logo-text {
+            font-family: 'plank';
+            word-spacing: -2px;
+            font-size: 85%;
+        }
+
+        main {
+            min-height: 100vh;
+        }
+
+        footer {
+            font-family: "monster-of-south";
+            font-style: italic;
+            text-shadow: 0 1px 0 #222;
+            margin-top: auto;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
+{% endblock %}
+
+{% block Content %}
+    <header id="header">
+        <div class="header-content-right">
+            <a href="/">
+                خانه
+                <i class="fa fa-home"></i>
+            </a>
+            <a href="#">
+                موزیکها
+                <i class="fa fa-music"></i>
+            </a>
+        </div>
+        <div>
+            <p class="logo-text">Crawler Musicdar</p>
+        </div>
+    </header>
+    <main></main>
+    <footer>
+        <p>Musicdar Crawler</p>
+    </footer>
+{% endblock %}
+
+{% block Script %}
+
+{% endblock %}
