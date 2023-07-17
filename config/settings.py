@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-(c@i#%ftl&7d4#mpn9yjc5pu#=86z1)q5xm--#%$s9ke5g4j=u'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -78,7 +81,15 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    },
+}
+
+DATABASE_HOST = {
+    'NAME': 'musicdar_db',
+    'USER': 'root_external',
+    'PASSWORD': 'FazelMomeni1382',
+    'HOST': '94.74.182.159',
+    'PORT': '3306'
 }
 
 # Password validation
@@ -131,11 +142,25 @@ CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = TIME_ZONE
-# CELERY_IMPORTS = [
-#     'public.tasks',
-# ]
+CELERY_IMPORTS = [
+    'public.tasks',
+    'crawler.tasks',
+]
+
+# Email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_USER = os.environ.get('EMAIL_USER')
 
 # MUSIC SITE CONFIG
 #   Musicdar.ir
+
+REMOVE_WORDS_FROM_TITLE = [
+    'دانلود'
+]
 MUSIC_SITE_DOMAIN = 'musicdar.ir'
 MUSIC_SITE_TITLE = 'موزیکدار'
