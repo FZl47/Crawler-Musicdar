@@ -86,6 +86,10 @@ body {
     color: #fff;
 }
 
+.badge-purple{
+    background: #7a12e8;
+    color: #f0f0f0;
+}
 
 .ncf-container {
     font-size: 14px;
@@ -271,6 +275,14 @@ body {
     border-right-style: solid;
     width: 25px;
     height: 25px;
+}
+
+.collapse-td{
+    padding: 0;
+}
+
+.text-gray{
+    color: #888;
 }
 
 @keyframes loading-circle-animation {
