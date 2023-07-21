@@ -1,4 +1,4 @@
-from . import tasks
+from public import tasks
 
 
 def send_email(subject: str, message: str = '', email_receiver: list = []):
