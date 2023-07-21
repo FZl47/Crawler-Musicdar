@@ -84,7 +84,6 @@ DATABASES = {
     },
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
@@ -153,10 +152,11 @@ EMAIL_USER = os.environ.get('EMAIL_USER')
 SITE_CONFIG = {
     'DOMAIN': 'musicdar.ir',
     'TITLE': 'موزیکدار',
-    'TOKEN':'should be set',
-    'URLS': {
-        'ARTIST': 'https://musicdar.ir/singer/{}',
-        'MUSIC': 'https://musicdar.ir/musics/{}',
+    'API': {
+        'TOKEN': 'should be set',
+        'ENDPOINTS': {
+            'https://musicdar.ir/api/'
+        }
     },
     'REMOVE_WORDS_FROM_TITLE': [
         'دانلود',
