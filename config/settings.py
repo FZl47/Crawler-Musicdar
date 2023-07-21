@@ -84,13 +84,6 @@ DATABASES = {
     },
 }
 
-DATABASE_HOST = {
-    'NAME': 'musicdar_db',
-    'USER': 'root_external',
-    'PASSWORD': 'FazelMomeni1382',
-    'HOST': '94.74.182.159',
-    'PORT': '3306'
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -157,10 +150,15 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_USER = os.environ.get('EMAIL_USER')
 
 # MUSIC SITE CONFIG
-#   Musicdar.ir
-
-REMOVE_WORDS_FROM_TITLE = [
-    'دانلود'
-]
-MUSIC_SITE_DOMAIN = 'musicdar.ir'
-MUSIC_SITE_TITLE = 'موزیکدار'
+SITE_CONFIG = {
+    'DOMAIN': 'musicdar.ir',
+    'TITLE': 'موزیکدار',
+    'TOKEN':'should be set',
+    'URLS': {
+        'ARTIST': 'https://musicdar.ir/singer/{}',
+        'MUSIC': 'https://musicdar.ir/musics/{}',
+    },
+    'REMOVE_WORDS_FROM_TITLE': [
+        'دانلود',
+    ]
+}
