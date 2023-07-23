@@ -122,6 +122,11 @@ class AddMusicsCategoryState(models.Model):
     def __str__(self):
         return f'#{self.id} Add music category state'
 
+    def delete(self,*args,**kwargs):
+        self.category.count_music_geted += self.new_musics_geted
+        self.category.count_pages_geted += self.new_pages_geted
+        super(AddMusicsCategoryState,self).delete(*args,**kwargs)
+
 
 class HistoryAdd(models.Model):
     add = models.ForeignKey('AddMusics', on_delete=models.CASCADE)
