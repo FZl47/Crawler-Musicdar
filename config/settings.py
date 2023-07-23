@@ -52,6 +52,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
+    # 'public.middleware.log.LogErrorCheck'
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -155,10 +157,25 @@ SITE_CONFIG = {
     'API': {
         'TOKEN': 'should be set',
         'ENDPOINTS': {
-            'https://musicdar.ir/api/'
+            'music': 'http://127.0.0.1:8000/api/v1/music'
         }
     },
     'REMOVE_WORDS_FROM_TITLE': [
         'دانلود',
+        'اهنگ'
+    ]
+}
+
+LOG_CONFIG = {
+    'path': BASE_DIR / 'log.txt',
+    # if it is log levels then email will be sent
+    'email_levels': [
+        'ERROR'
+    ],
+    # if the number of logs with unchecked error level is more than this number, the operation of the program will stop
+    'error_level_stop': 3,
+    # which pages can be accessed if an error_level_stop occurs
+    'allow_urls':[
+        '/admin'
     ]
 }
