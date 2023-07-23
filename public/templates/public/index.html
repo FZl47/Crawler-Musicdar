@@ -12,16 +12,42 @@
 {% block Style %}
     <style>
 
-        * {
-            transition: all .25s;
+        th {
+            padding: 20px 10px;
+            background: #eee;
+            font-size: 95%;
         }
 
+        td {
+            padding: 15px 10px;
+        }
+
+        tr:nth-of-type(odd) {
+            background: rgba(224, 202, 250, 0.2);
+        }
+
+        progress {
+            width: 60px;
+            transform: scaleY(1.9);
+            direction: ltr;
+        }
+
+
         #header {
-            padding: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 2px 5px #ddd;
+        }
+
+        #header > div {
+            padding: 15px;
+        }
+
+        .header-content-right {
+            white-space: nowrap;
+            overflow-x: auto;
+            overflow-y: hidden;
         }
 
         .header-content-right a {
@@ -33,23 +59,94 @@
         }
 
         .header-content-right a:hover {
-            color: #242483;
-            background: rgba(215, 215, 215, 0.6);
+            color: #11ad6f;
+            background: rgba(215, 215, 215, 0.4);
             border-radius: 25px;
         }
 
-        .header-content-right a i {
+        .header-content-right i {
             margin: 0 2px;
+            color: inherit;
         }
 
         .logo-text {
-            font-family: 'plank';
-            word-spacing: -2px;
-            font-size: 85%;
+            direction: ltr;
+            color: rgb(132, 73, 201);
+            font-weight: bold;
+            font-size: 80%;
+            margin: 0 10px;
+            font-family: 'Vice Versus', sans-serif;
+            text-align: center;
         }
 
         main {
             min-height: 100vh;
+        }
+
+        .content {
+            width: 70%;
+            margin: auto;
+        }
+
+        .container-last-detail .content {
+            justify-content: center;
+            align-items: center;
+        }
+
+        .last-detail {
+            width: 280px;
+            margin: 40px;
+            position: relative;
+            background: #f1f1f1;
+            box-shadow: 0 7px 22px rgba(208, 208, 208, 0.3);
+            border-radius: 14px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .last-detail-title {
+            font-size: 130%;
+            font-family: Kalameh-Bold;
+        }
+
+        .last-detail-content {
+            color: #777;
+            font-size: 95%;
+            margin-top: 25px;
+        }
+
+        .last-detail i {
+            position: absolute;
+            left: 5px;
+            bottom: 5px;
+            opacity: .5;
+            font-size: 450%;
+            color: rgba(190, 215, 215, 0.3);
+        }
+
+        .models-music {
+            padding: 10px 0;
+            text-align: center;
+            margin: auto;
+            width: 100%;
+            box-shadow: 0 6px 15px #ddd;
+        }
+
+        .category-state-add {
+            padding: 10px 0;
+            text-align: center;
+            margin: auto;
+            width: 100%;
+            font-size: 90%;
+        }
+
+        .category-state-add th {
+            background: #f9f9f9;
+        }
+
+
+        .models-music input {
+            transform: scale(1.3);
         }
 
         footer {
@@ -60,6 +157,13 @@
             text-align: center;
             padding: 10px;
         }
+
+        @media screen and (max-width: 768px) {
+            .last-detail {
+                margin: 30px auto;
+            }
+        }
+
     </style>
 {% endblock %}
 
@@ -74,17 +178,289 @@
                 موزیکها
                 <i class="fa fa-music"></i>
             </a>
+             <a href="#">
+                خواننده ها
+                <i class="fa fa-microphone"></i>
+            </a>
+            <a href="#">
+                نمودار ها
+                <i class="fa fa-bar-chart"></i>
+            </a>
+            <a href="#">
+                تاریخچه
+                <i class="fa fa-list"></i>
+            </a>
         </div>
         <div>
-            <p class="logo-text">Crawler Musicdar</p>
+            <p class="logo-text">
+                Crawler
+                <br>
+                &nbsp;
+                Musicdar
+            </p>
         </div>
     </header>
-    <main></main>
+    <main>
+        <div class="container-last-detail">
+            <div class="title-container">
+                <p>اخرین آمار</p>
+            </div>
+            <div class="content d-block d-md-flex">
+                <div class="last-detail">
+                    <i class="fa fa-plus"></i>
+                    <p class="last-detail-title">
+                        تعداد اخرین موزیک ها
+                    </p>
+                    <p class="last-detail-content">
+                        0
+                    </p>
+                </div>
+                <div class="last-detail">
+                    <i class="fa fa-music"></i>
+                    <p class="last-detail-title">
+                        تعداد کل موزیکها
+                    </p>
+                    <p class="last-detail-content">
+                        202,310
+                    </p>
+                </div>
+                <div class="last-detail">
+                    <i class="fa fa-clock"></i>
+                    <p class="last-detail-title">
+                        تاریخ اخرین اپدیت
+                    </p>
+                    <p class="last-detail-content">
+                        20 days ago
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="container-actions">
+            <div class="title-container">
+                <p>عملیات ها</p>
+            </div>
+            <div class="content text-right">
+                <div>
+                    <div class="title-content">
+                        <p>
+                            اضافه کردن موزیک
+                        </p>
+                    </div>
+                    {% if add_obj is None %}
+                        <div>
+                            <p class="text-right font-kalameh-bold">
+                                <b>مدل ها :</b>
+                            </p>
+                            {% if site_models %}
+                                <form action="{% url 'public:start_crawl' %}">
+                                    <table class="models-music">
+                                        <tr>
+                                            <th class="model-music-name">عنوان</th>
+                                            <th colspan="model-music-domain">دامنه</th>
+                                            <th class="model-music-check">انتخاب</th>
+                                        </tr>
+                                        {% for site_model in site_models %}
+                                            <tr>
+                                                <td class="model-music-name">{{ site_model.name }}</td>
+                                                <td colspan="model-music-domain"><code>{{ site_model.domain }}</code>
+                                                </td>
+                                                <td class="model-music-check"><input type="checkbox"
+                                                                                     class="model-music-check"
+                                                                                     name="models_selected"
+                                                                                     value="{{ site_model.id }}"
+                                                                                     checked>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </table>
+                                    <div class="text-left mt-4">
+                                        <button id="start-crawl" class="btn btn-purple px-5 py-2">
+                                            شروع
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                            {% else %}
+                                <div class="text-center mt-5 text-danger">
+                                    <h6>مدلی (سایت) برای عملیات اضافه کردن یافت نشد</h6>
+                                </div>
+                            {% endif %}
+                        </div>
+
+                    {% endif %}
+
+                    {% if add_obj %}
+                        <div>
+                            <p class="text-right font-kalameh-bold">
+                                <b>مدل های در حال اضافه شدن :</b>
+                            </p>
+                            <table class="models-music">
+                                <tr>
+                                    <th class="model-music-name">عنوان</th>
+                                    <th colspan="model-music-domain">دامنه</th>
+                                    <th class="model-music-check">وضعیت</th>
+                                </tr>
+                                {% for site_model in site_models %}
+                                    <tr>
+                                        <td class="model-music-name">
+                                            <a data-toggle="collapse"
+                                               href="#collapse-{{ site_model.id }}" role="button" aria-expanded="false"
+                                               aria-controls="collapse-{{ site_model.id }}">{{ site_model.name }}</a>
+                                        </td>
+                                        <td colspan="model-music-domain"><code>{{ site_model.domain }}</code>
+                                        </td>
+                                        <td class="model-music-check">
+                                            <input type="hidden" name="model_state" value="{{ site_model.id }}">
+                                            {% if add_obj.is_running is False %}
+                                                <i class="fa fa-stop text-warning"></i>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="collapse-td" colspan="40">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="collapse" id="collapse-{{ site_model.id }}">
+                                                        <div class="card card-body">
+                                                            {% if site_model.has_categories_add_state %}
+                                                                <table class="category-state-add">
+                                                                    <tr>
+                                                                        <th>
+                                                                            دسته بندی
+                                                                        </th>
+                                                                        <th>
+                                                                            صفحه های جدید
+                                                                            <span class="badge badge-purple pt-1">NEW</span>
+                                                                        </th>
+                                                                        <th>
+                                                                            موزیک های جدید
+                                                                            <span class="badge badge-purple pt-1">NEW</span>
+                                                                        </th>
+                                                                        <th>
+                                                                            وضعیت بارگذاری
+                                                                        </th>
+                                                                    </tr>
+                                                                    {% for category_state in site_model.get_categories_add_state %}
+                                                                        <tr>
+                                                                            <td>
+                                                                                {{ category_state.category.name }}
+                                                                            </td>
+                                                                            <td>
+                                                                                {{ category_state.new_pages }}
+                                                                                <span class="text-success">({{ category_state.new_pages_geted }})</span>
+                                                                            </td>
+                                                                            <td>
+                                                                                {{ category_state.new_musics }}
+                                                                                <span class="text-success">({{ category_state.new_musics_geted }})</span>
+                                                                            </td>
+                                                                            <td>
+                                                                                {% if add_obj.is_running is False %}
+                                                                                    <i class="fa fa-stop text-warning ml-1"></i>
+                                                                                {% endif %}
+                                                                                <progress
+                                                                                        value="{{ category_state.new_musics_geted }}"
+                                                                                        max="{{ category_state.new_musics }}"></progress>
+                                                                            </td>
+                                                                        </tr>
+                                                                    {% endfor %}
+                                                                </table>
+                                                            {% else %}
+                                                                <div class="my-2">
+                                                                    <p class="pb-2 text-gray">در حال بررسی</p>
+                                                                    <div class="category-state-add-checking"></div>
+                                                                </div>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                            <div class="text-left mt-4">
+                                <a href="{% url 'public:delete_crawl' %}" id="pause-crawl"
+                                   class="btn btn-danger px-5 py-2 mx-3">
+                                    حذف
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                                {% if add_obj.is_running %}
+                                    <a href="{% url 'public:pause_crawl' %}" id="pause-crawl"
+                                       class="btn btn-warning px-5 py-2">
+                                        توقف
+                                        <i class="fa fa-stop"></i>
+                                    </a>
+                                {% endif %}
+                                {% if add_obj.is_running is False %}
+                                    <a href="{% url 'public:continue_crawl' %}" id="continue-crawl" class="btn btn-info px-5 py-2">
+                                        ادامه
+                                        <i class="fa fa-play"></i>
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <a href="{% url 'public:test' %}" class="btn btn-danger">TEST</a>
+
     <footer>
         <p>Musicdar Crawler</p>
     </footer>
 {% endblock %}
 
 {% block Script %}
+    <script>
+        {% if add_obj.is_running %}
+            //createLoading(document.querySelector('#start-crawl'), {size: 'small', color: '#f2e2ff'})
+            for (let site_id of {{ add_obj_sites_id }}) {
+                let input = document.querySelector(`input[name="model_state"][value="${site_id}"]`)
+                createLoading(input.parentElement, {size: 'small'})
+            }
+        {% endif %}
+    </script>
+    <script>
+        {#let btn_check_models = document.querySelector('#check-models')#}
+        {##}
+        {#btn_check_models.addEventListener('click', function () {#}
+        {##}
+        {#    function removeAllLoadings() {#}
+        {#        models_input.forEach((input) => {#}
+        {#            if (input.checked) {#}
+        {#                removeLoading(input.parentElement)#}
+        {#            }#}
+        {#        })#}
+        {#        removeLoading(btn_check_models)#}
+        {#    }#}
+        {##}
+        {#    createLoading(btn_check_models, {size: 'small'})#}
+        {#    let models_input = document.querySelectorAll('input[name="models-music"]')#}
+        {#    let models_selected = []#}
+        {#    models_input.forEach((input) => {#}
+        {#        if (input.checked) {#}
+        {#            models_selected.push(input.value)#}
+        {#            createLoading(input.parentElement, {size: 'small'})#}
+        {#        }#}
+        {#    })#}
+        {#    send_ajax('/check-models', {#}
+        {#        'model_selected': models_selected#}
+        {#    }, 'POST', function (response) {#}
+        {#        removeAllLoadings()#}
+        {#    }, function (faild) {#}
+        {#        removeAllLoadings()#}
+        {#    })#}
+        //})
 
+        document.querySelectorAll('.category-state-add-checking').forEach((el) => {
+            createLoading(el, {
+                size: 'small',
+                color: '#1ee696'
+            })
+        })
+
+    </script>
 {% endblock %}
