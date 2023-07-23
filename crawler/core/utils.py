@@ -21,7 +21,7 @@ def normalize_text(text, remove_words=[]):
 def normalize_title(text, remove_words=[]):
     text = replace_words_labels(text)
     remove_words = remove_words or []
-    remove_words.extend(settings.WP_CONFIG['REMOVE_WORDS_FROM_TITLE'])
+    remove_words.extend(settings.SITE_CONFIG['REMOVE_WORDS_FROM_TITLE'])
     return normalize_text(text,remove_words)
 
 
