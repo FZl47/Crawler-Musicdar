@@ -13,9 +13,10 @@ def normalize_num(num):
 
 def normalize_text(text, remove_words=[]):
     text = replace_words_labels(text)
-    remove_words = remove_words or []
-    res = ' '.join(filter(lambda x: x.lower() not in remove_words, text.split()))
-    return res
+    for rmw in remove_words:
+        text = text.replace(rmw,'')
+    text = text.replace('  ',' ')
+    return text
 
 
 def normalize_title(text, remove_words=[]):
